@@ -1,5 +1,6 @@
 package WindowHandlesTest;
 
+import java.util.Set;
 import java.util.concurrent.ForkJoinPool.ManagedBlocker;
 
 import javax.xml.xpath.XPath;
@@ -18,19 +19,30 @@ public class WindowHandleproject {
 		
 		ChromeDriver driver = new ChromeDriver();
 		
-		                                                         //driver.get("http://webdriveruniversity.com/Contact-Us/contactus.html");
+		                                                            //driver.get("http://webdriveruniversity.com/Contact-Us/contactus.html");
 		
 		//if new window or new tab is opening then we need to use "Windowhandle"
 		//set the parent window in the beginning itself
 		
-	String Parentwindow =driver.getWindowHandle();             // string value needs to give to the window handle
+	   String Parentwindow =driver.getWindowHandle();                  // string value needs to give to the window handle
 		
+	   
 		driver.get("http://webdriveruniversity.com/index.html");
 		
 		WebElement contact= driver.findElement(By.xpath("//*[@id=\"contact-us\"]"));
 		
 		contact.click();
 		 
+		
+		Set<String> Secondwindow=driver.getWindowHandles();
+		
+		for (String Newwindow : Secondwindow) {
+			
+			driver.switchTo().window(Newwindow);
+			
+		}
+		
+		
 		WebElement Firstname= driver.findElement(By.xpath("/html/body/div[1]/div/div/section/div/div[2]/form/input[1]"));
 		Firstname.click();
 		Firstname.sendKeys("Testing");
